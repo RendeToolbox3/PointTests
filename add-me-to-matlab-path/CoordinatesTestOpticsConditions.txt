@@ -1,0 +1,11 @@
+filmDistance	cameraType	
+49	idealDiffraction	
+50	idealDiffraction	
+70	idealDiffraction	
+49	realisticDiffraction	
+50	realisticDiffraction	
+70	realisticDiffraction	
+49	perspective	
+50	perspective	
+70	perspective	
+

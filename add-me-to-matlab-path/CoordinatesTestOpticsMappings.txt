@@ -1,0 +1,55 @@
+Collada {
+    % swap camera handedness from Blender's Collada output
+    Camera:scale|sid=scale = -1 1 1
+
+    %Camera:translate|sid=backup.type = Translate
+    %Camera:translate|sid=backup = 0 0 7500
+}
+
+PBRT_Optics {
+    % use the direct lighting integrator
+    integrator:SurfaceIntegrator:directlighting
+    sampler:pixelsamples.integer = 128
+
+}
+
+PBRT_Optics-path {
+    % choose a camera
+    % attempt to match perspective camera fov with fancy camera properties 
+    % starting with wikipedia table at
+    % http://en.wikipedia.org/wiki/Angle_of_view#Common_lens_angles_of_view
+
+    Camera-camera.type = (cameraType)
+
+    % for perspective camera
+    Camera-camera:parameter|name=fov = 27.0
+
+    % for realistic diffraction camera
+    Camera-camera:parameter|name=specfile.type = string
+    Camera-camera:parameter|name=specfile = dgauss.50mm.dat
+
+    % for ideal diffraction camera
+    Camera-camera:parameter|name=focal_length.type = float
+    Camera-camera:parameter|name=focal_length = 50
+
+    % for both ideal diffraction and realistic diffraction cameras
+    Camera-camera:parameter|name=filmdistance.type = float
+    Camera-camera:parameter|name=filmdistance = (filmDistance)
+
+    Camera-camera:parameter|name=aperture_diameter.type = float
+    Camera-camera:parameter|name=aperture_diameter = 1
+
+    Camera-camera:parameter|name=filmdiag.type = float
+    Camera-camera:parameter|name=filmdiag = 43.3
+
+    Camera-camera:parameter|name=diffractionEnabled.type = float
+    Camera-camera:parameter|name=diffractionEnabled = 1
+
+    Camera-camera:parameter|name=chromaticAberrationEnabled.type = float
+    Camera-camera:parameter|name=chromaticAberrationEnabled = 1
+
+    % for both ideal diffraction and realistic diffraction cameras
+    % scale camera internal millimeters to scene meters
+    Camera-camera:transformation|name=millisToMeters.type = Scale
+    Camera-camera:transformation|name=millisToMeters = 1000 1000 1000
+}
